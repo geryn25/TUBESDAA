@@ -58,7 +58,6 @@ public class TUBESDAA {
             Collections.sort(knapsack,Knapsack.profitComparator);
         } else if (num==3) {
             Collections.sort(knapsack,Knapsack.densityComparator);
-            System.out.println("abc");
         }
         int kTemp=0;
         int pTemp=0;
@@ -127,7 +126,7 @@ public class TUBESDAA {
                 Data[2]=greedy(3,k);
                 Knapsack Max=max(Data[0],Data[1],Data[2]);
                 final long endTime = System.currentTimeMillis();
-                System.out.println("/nTotal execution time: " + (endTime - startTime));
+                System.out.println("/nTotal execution time: " + (endTime - startTime)+" milisecond");
                 System.out.print("/nSolusi Maksimal yang didapat dari algoritma greedy adalah \n"
                         + "weight = "+Max.getWeight()+""
                                 + "\nProfit = "+Max.getProfit());
