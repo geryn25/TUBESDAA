@@ -68,7 +68,7 @@ public class Knapsack {
     public static Comparator<Knapsack> densityComparator=new Comparator<Knapsack>() {
         @Override
         public int compare(Knapsack o1, Knapsack o2) {
-            return (int)(o2.density-o1.density);
+            return Double.compare(o2.density, o1.density);
         }
     };
     

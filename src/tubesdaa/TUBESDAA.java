@@ -55,10 +55,10 @@ public class TUBESDAA {
             Collections.sort(knapsack,Knapsack.weightComparator);
         }else if (num==2) {
             Collections.sort(knapsack,Knapsack.profitComparator);
-        } else {
+        } else if (num==3) {
             Collections.sort(knapsack,Knapsack.densityComparator);
+            System.out.println("abc");
         }
-        System.out.println("Data diurut Berdasarkan min Weight");
         for (int i=0;i<knapsack.size();i++) {
             System.out.println("Data ke "+(i+1));
             System.out.println(knapsack.get(i));
@@ -67,9 +67,11 @@ public class TUBESDAA {
         int kTemp=0;
         int pTemp=0;
         int i=0;
-        while (kTemp<=k  && kTemp+knapsack.get(i).getWeight()<=k) {
-            kTemp=kTemp+knapsack.get(i).getWeight();
-            pTemp=pTemp+knapsack.get(i).getProfit();
+        while (kTemp<=k) {
+            if (kTemp+knapsack.get(i).getWeight()<=k) {
+                kTemp=kTemp+knapsack.get(i).getWeight();
+                pTemp=pTemp+knapsack.get(i).getProfit();
+            }
             i++;
         }
         System.out.println("\nKapasitas : "+kTemp);
