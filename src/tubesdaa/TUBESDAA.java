@@ -67,7 +67,7 @@ public class TUBESDAA {
         int kTemp=0;
         int pTemp=0;
         int i=0;
-        while (kTemp<=k) {
+        while (kTemp<=k && i<knapsack.size()) {
             if (kTemp+knapsack.get(i).getWeight()<=k) {
                 kTemp=kTemp+knapsack.get(i).getWeight();
                 pTemp=pTemp+knapsack.get(i).getProfit();
