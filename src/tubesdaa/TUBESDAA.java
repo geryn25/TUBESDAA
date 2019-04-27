@@ -50,7 +50,8 @@ public class TUBESDAA {
         }
     }
     
-    public static void greedy(int num,int k) throws IOException {
+    public static Knapsack greedy(int num,int k) throws IOException {
+        Knapsack data;
         if (num==1) {
             Collections.sort(knapsack,Knapsack.weightComparator);
         }else if (num==2) {
@@ -58,11 +59,6 @@ public class TUBESDAA {
         } else if (num==3) {
             Collections.sort(knapsack,Knapsack.densityComparator);
             System.out.println("abc");
-        }
-        for (int i=0;i<knapsack.size();i++) {
-            System.out.println("Data ke "+(i+1));
-            System.out.println(knapsack.get(i));
-            System.out.println("");
         }
         int kTemp=0;
         int pTemp=0;
@@ -74,10 +70,10 @@ public class TUBESDAA {
             }
             i++;
         }
-        System.out.println("\nKapasitas : "+kTemp);
-        System.out.println("Profit    : "+pTemp);
         
-        System.in.read();
+        data=new Knapsack(kTemp,pTemp);
+        return data;
+        
         
     }
     public static void mainmenu(){
@@ -85,21 +81,54 @@ public class TUBESDAA {
         System.out.println("   1. Greedy by Weight");
         System.out.println("   2. Greedy by Profit");
         System.out.println("   3. Greedy by Density");
+        System.out.println("   4. solution");
         System.out.print(">> Masukkan pilihan anda :");
     }
     public static void pilihan(int num,int k) throws IOException {
+        Knapsack[] Data=new Knapsack[3];
         switch(num) {
             case 1:
                 System.out.println("\n");
-                greedy(num,k);
+                Data[0]=greedy(num,k);
+                for (int i=0;i<knapsack.size();i++) {
+                    System.out.println("Data ke "+(i+1));
+                    System.out.println(knapsack.get(i));
+                    System.out.println("");
+                }
+                System.out.println(Data[0]);
+                System.in.read();
                 break;
             case 2:
                 System.out.println("\n");
-                greedy(num,k);
+                Data[1]=greedy(num,k);
+                for (int i=0;i<knapsack.size();i++) {
+                    System.out.println("Data ke "+(i+1));
+                    System.out.println(knapsack.get(i));
+                    System.out.println("");
+                }
+                System.out.println(Data[1]);
+                System.in.read();
                 break;
             case 3:
                 System.out.println("\n");
-                greedy(num,k);
+                Data[2]=greedy(num,k);
+                for (int i=0;i<knapsack.size();i++) {
+                    System.out.println("Data ke "+(i+1));
+                    System.out.println(knapsack.get(i));
+                    System.out.println("");
+                }
+                System.out.println(Data[2]);
+                System.in.read();
+                break;
+            case 4:
+                Data[0]=greedy(1,k);
+                Data[1]=greedy(2,k);
+                Data[2]=greedy(3,k);
+                Knapsack Max=max(Data[0],Data[1],Data[2]);
+                System.out.print("Solusi Maksimal yang didapat dari algoritma greedy adalah \n"
+                        + "weight = "+Max.getWeight()+""
+                                + "\nProfit = "+Max.getProfit());
+                System.in.read();
                 break;
             case 0:
                 System.out.println("Exit");
@@ -110,9 +139,14 @@ public class TUBESDAA {
                 System.out.println("inputan salah");
         }
     }
-    public static void clrscr() {  
-    System.out.print("\033[H\033[2J");  
-    System.out.flush();  
-   }
+    public static Knapsack max(Knapsack a,Knapsack b,Knapsack c) {
+        if (a.getProfit()>b.getProfit() && a.getProfit()>c.getProfit()) {
+            return a;
+        } else if (b.getProfit()>a.getProfit() && b.getProfit()>c.getProfit()) {
+            return b;
+        } else {
+            return c;
+        }
+    }
     
 }

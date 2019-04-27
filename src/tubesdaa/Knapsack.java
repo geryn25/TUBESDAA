@@ -48,9 +48,15 @@ public class Knapsack {
     
     @Override
     public String toString() {
-        return "Weight  :"+getWeight()+"\n"
+        if (this.density==0) {
+            return "Weight  :"+getWeight()+"\n"
+                + "Profit  :"+getProfit()+"\n";
+        } else{
+            return "Weight  :"+getWeight()+"\n"
                 + "Profit  :"+getProfit()+"\n"
                 + "Density :"+getDensity();
+        }
+        
     }
     
     public static Comparator<Knapsack> weightComparator = new Comparator<Knapsack>() {
