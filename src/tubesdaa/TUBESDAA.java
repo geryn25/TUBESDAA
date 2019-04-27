@@ -121,11 +121,14 @@ public class TUBESDAA {
                 System.in.read();
                 break;
             case 4:
+                final long startTime = System.currentTimeMillis();
                 Data[0]=greedy(1,k);
                 Data[1]=greedy(2,k);
                 Data[2]=greedy(3,k);
                 Knapsack Max=max(Data[0],Data[1],Data[2]);
-                System.out.print("Solusi Maksimal yang didapat dari algoritma greedy adalah \n"
+                final long endTime = System.currentTimeMillis();
+                System.out.println("/nTotal execution time: " + (endTime - startTime));
+                System.out.print("/nSolusi Maksimal yang didapat dari algoritma greedy adalah \n"
                         + "weight = "+Max.getWeight()+""
                                 + "\nProfit = "+Max.getProfit());
                 System.in.read();
