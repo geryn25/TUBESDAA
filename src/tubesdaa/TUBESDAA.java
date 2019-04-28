@@ -46,18 +46,21 @@ public class TUBESDAA {
             int weight=reader.nextInt();
             System.out.print("Profit :");
             int profit=reader.nextInt();
-            knapsack.add(new Knapsack(weight,profit));
+            knapsack.add(new Knapsack(weight,profit,i));
         }
     }
     
     public static Knapsack greedy(int num,int k) throws IOException {
         Knapsack data;
         if (num==1) {
-            Collections.sort(knapsack,Knapsack.weightComparator);
+//            knapsack=sort("Weight",knapsack); Bubble Sort
+            Collections.sort(knapsack,Knapsack.weightComparator); //Sort by Weight
         }else if (num==2) {
-            Collections.sort(knapsack,Knapsack.profitComparator);
+//            knapsack=sort("Profit",knapsack); Bubble Sort
+            Collections.sort(knapsack,Knapsack.profitComparator); //Sort by Profit
         } else if (num==3) {
-            Collections.sort(knapsack,Knapsack.densityComparator);
+//            knapsack=sort("Density",knapsack); Bubble Sort
+            Collections.sort(knapsack,Knapsack.densityComparator);//Sort by Density
         }
         int kTemp=0;
         int pTemp=0;
@@ -89,51 +92,56 @@ public class TUBESDAA {
             case 1:
                 System.out.println("\n");
                 Data[0]=greedy(num,k);
+                System.out.println("NO  ||  Profit  ||  Weight  ||  Density  ||");
                 for (int i=0;i<knapsack.size();i++) {
-                    System.out.println("Data ke "+(i+1));
-                    System.out.println(knapsack.get(i));
+                    System.out.println((i+1)+"        "+knapsack.get(i).getProfit()+"          "+knapsack.get(i).getWeight()+"             "+knapsack.get(i).getDensity());
                     System.out.println("");
                 }
+                System.out.println("Greedy By Weight :");
                 System.out.println(Data[0]);
                 System.in.read();
                 break;
             case 2:
                 System.out.println("\n");
                 Data[1]=greedy(num,k);
+                System.out.println("NO  ||  Profit  ||  Weight  ||  Density  ||");
                 for (int i=0;i<knapsack.size();i++) {
-                    System.out.println("Data ke "+(i+1));
-                    System.out.println(knapsack.get(i));
+                    System.out.println((i+1)+"        "+knapsack.get(i).getProfit()+"          "+knapsack.get(i).getWeight()+"             "+knapsack.get(i).getDensity());
                     System.out.println("");
                 }
+                System.out.println("Greedy By Profit :");
                 System.out.println(Data[1]);
                 System.in.read();
                 break;
             case 3:
                 System.out.println("\n");
                 Data[2]=greedy(num,k);
+                System.out.println("NO  ||  Profit  ||  Weight  ||  Density  ||");
                 for (int i=0;i<knapsack.size();i++) {
-                    System.out.println("Data ke "+(i+1));
-                    System.out.println(knapsack.get(i));
+                    System.out.println((i+1)+"        "+knapsack.get(i).getProfit()+"          "+knapsack.get(i).getWeight()+"             "+knapsack.get(i).getDensity());
                     System.out.println("");
                 }
+                System.out.println("Greedy By Density :");
                 System.out.println(Data[2]);
                 System.in.read();
                 break;
             case 4:
-                final long startTime = System.currentTimeMillis();
                 Data[0]=greedy(1,k);
                 Data[1]=greedy(2,k);
                 Data[2]=greedy(3,k);
                 Knapsack Max=max(Data[0],Data[1],Data[2]);
-                final long endTime = System.currentTimeMillis();
-                System.out.println("/nTotal execution time: " + (endTime - startTime)+" milisecond");
-                System.out.print("/nSolusi Maksimal yang didapat dari algoritma greedy adalah \n"
+                Collections.sort(knapsack,Knapsack.idComparator);
+                System.out.println("NO  ||  Profit  ||  Weight  ||  Density  ||");
+                for (int i=0;i<knapsack.size();i++) {
+                    System.out.println((i+1)+"        "+knapsack.get(i).getProfit()+"          "+knapsack.get(i).getWeight()+"             "+knapsack.get(i).getDensity());
+                    System.out.println("");
+                }
+                System.out.print("Solusi Maksimal yang didapat dari algoritma greedy adalah \n"
                         + "weight = "+Max.getWeight()+""
                                 + "\nProfit = "+Max.getProfit());
                 System.in.read();
                 break;
             case 0:
-                System.out.println("Exit");
                 System.out.println("Tekan enter untuk exit");
                 System.in.read();
                 break;
@@ -150,5 +158,50 @@ public class TUBESDAA {
             return c;
         }
     }
+    public static ArrayList<Knapsack> sort(String str,ArrayList<Knapsack> k){
+        Knapsack temp;
+        Knapsack[] test= new Knapsack[k.size()];
+        for (int i=0;i<k.size();i++) {
+            test[i]=k.get(i);
+        }
+        
+        if (str=="Weight") {
+            for (int i=0;i<k.size()-1;i++) {
+                for (int j=1;j<k.size()-1;j++){
+                    if (test[j-1].getWeight()>test[j].getWeight()){
+                        temp=test[j-1];
+                        test[j-1]=test[j];
+                        test[j]=temp;
+                    }
+                }
+            }
+        } else if (str=="Profit")  {
+            for (int i=0;i<k.size()-1;i++) {
+                for (int j=1;j<k.size()-1;j++){
+                    if (test[j-1].getProfit()<test[j].getProfit()){
+                        temp=test[j-1];
+                        test[j-1]=test[j];
+                        test[j]=temp;
+                    }
+                }
+            }
+        } else if (str=="Density") {
+            for (int i=0;i<k.size()-1;i++) {
+                for (int j=1;j<k.size()-1;j++){
+                    if (test[j-1].getDensity()<test[j].getDensity()){
+                        temp=test[j-1];
+                        test[j-1]=test[j];
+                        test[j]=temp;
+                    }
+                }
+            }
+        }
+        ArrayList<Knapsack> T=new ArrayList<Knapsack>();
+        for (int i=0;i<test.length;i++) {
+            T.add(test[i]);
+        }
+        return T  ;
+        }
+
     
 }

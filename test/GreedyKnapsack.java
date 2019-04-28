@@ -203,4 +203,5 @@ public class GreedyKnapsack {
 		System.out.println("\nITEMS STOLEN CONTINUOUSLY");
 		gk.printKnapsack();
 	}
-}
+        
+        

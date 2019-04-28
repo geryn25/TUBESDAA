@@ -1,51 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tubesdaa;
-
 import java.util.Comparator;
-
-/**
- *
- * @author geryn
- */
 public class Knapsack {
+    private int id;
     private int weight;
     private int profit;
     private double density;
 
-    public Knapsack(int weight, int profit) {
+    public Knapsack(int weight, int profit,int id) {
+        this.id=id;
         this.weight = weight;
         this.profit = profit;
         this.density=(double) this.profit / this.weight;
     }
+    public Knapsack(int weight, int profit) {
+        this.weight = weight;
+        this.profit = profit;
+        this.density=(double) this.profit / this.weight;
 
+    }
     public int getWeight() {
         return weight;
     }
-
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
     public int getProfit() {
         return profit;
     }
-
     public void setProfit(int profit) {
         this.profit = profit;
     }
-
     public double getDensity() {
         return density;
     }
-
-    public void setDensity(double density) {
-        this.density = density;
+    public void setDensity() {
+        this.density = (double) this.profit / this.weight;
     }
-    
     @Override
     public String toString() {
         if (this.density==0) {
@@ -77,7 +67,14 @@ public class Knapsack {
             return Double.compare(o2.density, o1.density);
         }
     };
+    public static Comparator<Knapsack> idComparator = new Comparator<Knapsack>() {
+        @Override
+        public int compare(Knapsack o1, Knapsack o2) {
+            return o1.id-o2.id;
+        }
+    };
     
     
 }
 
+    
